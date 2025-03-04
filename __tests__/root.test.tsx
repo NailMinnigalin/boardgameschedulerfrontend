@@ -1,10 +1,11 @@
-import { expect, test } from "vitest";
+import { expect, test, afterEach } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 
 import Page from "../src/app/page";
-import { afterEach } from "vitest";
 
-afterEach(() => cleanup());
+afterEach(() => {
+  cleanup();
+});
 
 test("Root page has signIn button", () => {
   render(<Page />);
@@ -17,4 +18,12 @@ test("SignIn button has text 'Sign In'", () => {
   let signInButton = screen.getByTestId("signIn_button");
 
   expect(signInButton.textContent).toEqual("Sign In");
+});
+
+test("SignIn button has href to /signin", () => {
+  render(<Page />);
+
+  let signInButton = screen.getByTestId("signIn_button");
+
+  expect(signInButton).toHaveAttribute("href", "/signin");
 });
