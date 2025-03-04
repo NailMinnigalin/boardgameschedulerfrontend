@@ -27,3 +27,8 @@ test("SignIn button has href to /signin", () => {
 
   expect(signInButton).toHaveAttribute("href", "/signin");
 });
+
+test("Snapshot test", () => {
+  const { asFragment } = render(<Page />);
+  expect(asFragment()).toMatchSnapshot();
+});
