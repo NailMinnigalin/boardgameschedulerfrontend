@@ -14,7 +14,9 @@ export default function SignInPage() {
         <CardTitle>Sign In</CardTitle>
         <CardContent>
           <form>
-            <Label htmlFor="email">Email</Label>
+            <Label data-testid="email_label" htmlFor="email">
+              Email
+            </Label>
             <Input
               data-testid="email_input"
               id="email"

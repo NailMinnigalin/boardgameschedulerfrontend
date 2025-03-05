@@ -16,3 +16,9 @@ test("SignIn page has email input field", () => {
 
   expect(screen.getByTestId("email_input")).toBeDefined();
 });
+
+test("Email input has label", () => {
+  render(<Page />);
+
+  expect(screen.getByTestId("email_label")).toBeDefined();
+});
