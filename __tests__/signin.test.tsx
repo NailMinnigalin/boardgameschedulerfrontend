@@ -22,3 +22,9 @@ test("Email input has label", () => {
 
   expect(screen.getByTestId("email_label")).toBeDefined();
 });
+
+test("SignIn page has password input field", () => {
+  render(<Page />);
+
+  expect(screen.getByTestId("password_input")).toBeDefined();
+});
