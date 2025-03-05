@@ -29,12 +29,17 @@ function SignInContent() {
 
 function PasswordInput() {
   return (
-    <Input
-      data-testid="password_input"
-      id="password"
-      type="password"
-      required
-    ></Input>
+    <>
+      <Label data-testid="password_label" htmlFor="password">
+        Email
+      </Label>
+      <Input
+        data-testid="password_input"
+        id="password"
+        type="password"
+        required
+      ></Input>
+    </>
   );
 }
 

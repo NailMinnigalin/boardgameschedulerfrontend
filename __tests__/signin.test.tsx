@@ -28,3 +28,9 @@ test("SignIn page has password input field", () => {
 
   expect(screen.getByTestId("password_input")).toBeDefined();
 });
+
+test("Password input has label", () => {
+  render(<Page />);
+
+  expect(screen.getByTestId("password_label")).toBeDefined();
+});
