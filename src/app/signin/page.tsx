@@ -31,7 +31,7 @@ function PasswordInput() {
   return (
     <>
       <Label data-testid="password_label" htmlFor="password">
-        Email
+        Password
       </Label>
       <Input
         data-testid="password_input"
