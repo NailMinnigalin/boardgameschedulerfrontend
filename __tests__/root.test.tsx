@@ -9,6 +9,7 @@ afterEach(() => {
 
 test("Root page has signIn button", () => {
   render(<Page />);
+
   expect(screen.getByTestId("signIn_button")).toBeDefined();
 });
 

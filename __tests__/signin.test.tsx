@@ -10,3 +10,9 @@ afterEach(() => {
 test("SignIn page exists", () => {
   render(<Page />);
 });
+
+test("SignIn page has email input field", () => {
+  render(<Page />);
+
+  expect(screen.getByTestId("email_input")).toBeDefined();
+});

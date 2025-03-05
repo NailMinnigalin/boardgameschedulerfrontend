@@ -12,7 +12,14 @@ export default function SignInPage() {
       <CardHeader>
         <CardTitle>Sign In</CardTitle>
         <CardContent>
-          <form></form>
+          <form>
+            <Input
+              data-testid="email_input"
+              id="email"
+              type="email"
+              required
+            ></Input>
+          </form>
         </CardContent>
       </CardHeader>
     </Card>
