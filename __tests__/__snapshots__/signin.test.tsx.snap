@@ -1,0 +1,84 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Snapshot test 1`] = `
+<DocumentFragment>
+  <div
+    class="flex min-h-screen items-center justify-center bg-gray-900"
+  >
+    <div
+      class="flex flex-col gap-6 rounded-xl border py-6 w-full max-w-md bg-gray-800 text-white shadow-lg"
+      data-slot="card"
+    >
+      <div
+        class="flex flex-col gap-1.5 px-6 text-center"
+        data-slot="card-header"
+      >
+        <div
+          class="font-semibold text-2xl"
+          data-slot="card-title"
+        >
+          Sign In
+        </div>
+      </div>
+      <div
+        class="px-6"
+        data-slot="card-content"
+      >
+        <form
+          class="space-y-4"
+        >
+          <div>
+            <label
+              class="items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1 block"
+              data-slot="label"
+              data-testid="email_label"
+              for="email"
+            >
+              Email
+            </label>
+            <input
+              class="border-input file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground flex h-9 min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive w-full"
+              data-slot="input"
+              data-testid="email_input"
+              id="email"
+              placeholder="Enter your email"
+              required=""
+              type="email"
+            />
+          </div>
+          <label
+            class="items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1 block"
+            data-slot="label"
+            data-testid="password_label"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="border-input file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground flex h-9 min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive w-full"
+            data-slot="input"
+            data-testid="password_input"
+            id="password"
+            placeholder="Enter your password"
+            required=""
+            type="password"
+          />
+        </form>
+      </div>
+      <div
+        class="flex items-center px-6"
+        data-slot="card-footer"
+      >
+        <button
+          class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-primary-foreground shadow-xs h-9 has-[>svg]:px-3 w-full rounded border border-gray-500 bg-gray-700 px-4 py-2 hover:bg-gray-600"
+          data-slot="button"
+          data-testid="signin_button"
+          type="submit"
+        >
+          Sign In
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -40,3 +40,8 @@ test("SignIn page has SignIn button", () => {
 
   expect(screen.getByTestId("signin_button")).toBeDefined();
 });
+
+test("Snapshot test", () => {
+  const { asFragment } = render(<Page />);
+  expect(asFragment()).toMatchSnapshot();
+});
