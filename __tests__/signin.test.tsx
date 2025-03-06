@@ -34,3 +34,9 @@ test("Password input has label", () => {
 
   expect(screen.getByTestId("password_label")).toBeDefined();
 });
+
+test("SignIn page has SignIn button", () => {
+  render(<Page />);
+
+  expect(screen.getByTestId("signin_button")).toBeDefined();
+});

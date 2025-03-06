@@ -1,3 +1,4 @@
+import { Button } from "@/components/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,7 +13,20 @@ export default function SignInPage() {
     <Card>
       <SignInHeader />
       <SignInContent />
+      <SignInButton />
     </Card>
+  );
+}
+
+function SignInButton() {
+  return (
+    <Button
+      data-testid="signin_button"
+      type="submit"
+      className="rounded border border-gray-500 bg-gray-800 px-4 py-2 hover:bg-gray-700"
+    >
+      Sign In
+    </Button>
   );
 }
 
