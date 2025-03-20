@@ -12,11 +12,13 @@ import { Label } from "@/components/components/ui/label";
 export default function SignInPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-900">
-      <Card className="w-full max-w-md bg-gray-800 text-white">
-        <SignInHeader />
-        <SignInContent />
-        <SignInFooter />
-      </Card>
+      <form className="space-y-4">
+        <Card className="w-full max-w-md bg-gray-800 text-white">
+          <SignInHeader />
+          <SignInContent />
+          <SignInFooter />
+        </Card>
+      </form>
     </div>
   );
 }
@@ -32,10 +34,8 @@ function SignInHeader() {
 function SignInContent() {
   return (
     <CardContent>
-      <form className="space-y-4">
-        <EmailInput />
-        <PasswordInput />
-      </form>
+      <EmailInput />
+      <PasswordInput />
     </CardContent>
   );
 }
