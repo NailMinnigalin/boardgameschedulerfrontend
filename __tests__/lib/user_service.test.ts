@@ -1,10 +1,5 @@
 import { UserService } from "lib/user-service"
-import { ApiService } from "lib/api-service"
-import { beforeEach, expect, type Mock, MockedFunction, test, vi } from "vitest";
-
-beforeEach(() => {
-    vi.clearAllMocks();
-});
+import { expect, test, vi } from "vitest";
 
 test.concurrent("UserService exists", () =>{
     expect(UserService).toBeDefined();
