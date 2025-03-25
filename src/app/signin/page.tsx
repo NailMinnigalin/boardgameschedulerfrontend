@@ -12,11 +12,10 @@ import { Label } from "@/components/components/ui/label";
 export default function SignInPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-900">
-      <form className="space-y-4">
+      <form>
         <Card className="w-full max-w-md bg-gray-800 text-white">
           <SignInHeader />
           <SignInContent />
-          <SignInFooter />
         </Card>
       </form>
     </div>
@@ -33,9 +32,10 @@ function SignInHeader() {
 
 function SignInContent() {
   return (
-    <CardContent>
+    <CardContent className="space-y-3">
       <EmailInput />
       <PasswordInput />
+      <SignInButton />
     </CardContent>
   );
 }
@@ -77,14 +77,6 @@ function EmailInput() {
         placeholder="Enter your email"
       ></Input>
     </div>
-  );
-}
-
-function SignInFooter() {
-  return (
-    <CardFooter>
-      <SignInButton />
-    </CardFooter>
   );
 }
 

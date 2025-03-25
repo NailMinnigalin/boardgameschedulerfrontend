@@ -5,9 +5,7 @@ exports[`Snapshot test 1`] = `
   <div
     class="flex min-h-screen items-center justify-center bg-gray-900"
   >
-    <form
-      class="space-y-4"
-    >
+    <form>
       <div
         class="flex flex-col gap-6 rounded-xl border py-6 shadow-sm w-full max-w-md bg-gray-800 text-white"
         data-slot="card"
@@ -24,7 +22,7 @@ exports[`Snapshot test 1`] = `
           </div>
         </div>
         <div
-          class="px-6"
+          class="px-6 space-y-3"
           data-slot="card-content"
         >
           <div>
@@ -63,11 +61,6 @@ exports[`Snapshot test 1`] = `
             required=""
             type="password"
           />
-        </div>
-        <div
-          class="flex items-center px-6"
-          data-slot="card-footer"
-        >
           <button
             class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-primary-foreground shadow-xs h-9 has-[>svg]:px-3 w-full rounded border border-gray-500 bg-gray-700 px-4 py-2 hover:bg-gray-600"
             data-slot="button"
