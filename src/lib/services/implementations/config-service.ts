@@ -1,3 +1,6 @@
+import { injectable } from "tsyringe";
+
+@injectable()
 export class ConfigService implements ConfigService {
   getApiUrl(): string {
     let apiUrl = process.env.BACKEND_API_URL;
