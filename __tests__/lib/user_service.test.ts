@@ -21,7 +21,7 @@ test.concurrent("UserService.signIn return SignInResult with IsSuccess true when
     }
     let userService = new UserService(mockApiService);
 
-    let signInResult = await userService.signIn("testEmail", "password");
+    let signInResult = await userService.signIn("testEmail@example.com", "password");
 
     expect(signInResult.isSuccess).toBeTruthy();
 })
@@ -32,7 +32,7 @@ test.concurrent("UserService.signIn return SignInResult with IsSuccess false whe
     }
     let userService = new UserService(mockApiService);
 
-    let signInResult = await userService.signIn("notExistingEmail", "password");
+    let signInResult = await userService.signIn("notExistingEmail@example.com", "password");
 
     expect(signInResult.isSuccess).toBeFalsy();
 })
@@ -43,12 +43,12 @@ test.concurrent("UserService.sign return SignInResult with ErrorType IncorrectEm
     }
     let userService = new UserService(mockApiService);
 
-    let signInResult = await userService.signIn("notExistingEmail", "password");
+    let signInResult = await userService.signIn("notExistingEmail@example.com", "password");
 
     expect(signInResult.errorType).toBe(SignInErrorType.IncorrectEmailOrPassword);
 })
 
-test.concurrent.skip("UserService.sign return SignInResult with ErrorType IncorrectEmailFormat when email format is incorrect", async () =>{
+test.concurrent("UserService.sign return SignInResult with ErrorType IncorrectEmailFormat when email format is incorrect", async () =>{
     const mockApiService = {
         signIn: vi.fn().mockResolvedValue(false)
     }

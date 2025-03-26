@@ -11,11 +11,19 @@ export class UserService implements IUserService {
   }
 
   async signIn(email: string, password: string) : Promise<SignInResult> {
+    if (!this.#isEmailValid(email))
+      return new SignInResult(false, SignInErrorType.IncorrectEmailFormat);
+
     let result = await this.#apiService.signIn(email, password);
     
     if (result)
       return SignInResult.Successful();
     else
       return new SignInResult(false, SignInErrorType.IncorrectEmailOrPassword);
+  }
+
+  #isEmailValid(email: string) : boolean {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
   }
 }
