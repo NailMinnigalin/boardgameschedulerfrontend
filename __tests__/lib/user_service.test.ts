@@ -1,4 +1,5 @@
-import { UserService } from "lib/user-service"
+import { UserService } from "lib/services/implementations/user-service";
+import { SignInErrorType } from "lib/services/interfaces/user-service";
 import { expect, test, vi } from "vitest";
 
 test.concurrent("UserService exists", () =>{
@@ -14,7 +15,7 @@ test.concurrent("UserService has signIn method", () => {
     expect(userService.signIn).toBeInstanceOf(Function);
 });
 
-test.concurrent("UserService.singIn return SignInResult with IsSuccess true when user is successfuly signed in", async () => {
+test.concurrent("UserService.signIn return SignInResult with IsSuccess true when user is successfuly signed in", async () => {
     const mockApiService = {
         signIn: vi.fn().mockResolvedValue(true)
     }
@@ -25,7 +26,7 @@ test.concurrent("UserService.singIn return SignInResult with IsSuccess true when
     expect(signInResult.isSuccess).toBeTruthy();
 })
 
-test.concurrent("UserService.singIn return SignInResult with IsSuccess false when user not exists", async () => {
+test.concurrent("UserService.signIn return SignInResult with IsSuccess false when user not exists", async () => {
     const mockApiService = {
         signIn: vi.fn().mockResolvedValue(false)
     }
@@ -34,4 +35,26 @@ test.concurrent("UserService.singIn return SignInResult with IsSuccess false whe
     let signInResult = await userService.signIn("notExistingEmail", "password");
 
     expect(signInResult.isSuccess).toBeFalsy();
+})
+
+test.concurrent("UserService.sign return SignInResult with ErrorType IncorrectEmailOrPassword when signin failed", async () =>{
+    const mockApiService = {
+        signIn: vi.fn().mockResolvedValue(false)
+    }
+    let userService = new UserService(mockApiService);
+
+    let signInResult = await userService.signIn("notExistingEmail", "password");
+
+    expect(signInResult.errorType).toBe(SignInErrorType.IncorrectEmailOrPassword);
+})
+
+test.concurrent.skip("UserService.sign return SignInResult with ErrorType IncorrectEmailFormat when email format is incorrect", async () =>{
+    const mockApiService = {
+        signIn: vi.fn().mockResolvedValue(false)
+    }
+    let userService = new UserService(mockApiService);
+
+    let signInResult = await userService.signIn("incorrectEmail", "password");
+
+    expect(signInResult.errorType).toBe(SignInErrorType.IncorrectEmailFormat);
 })

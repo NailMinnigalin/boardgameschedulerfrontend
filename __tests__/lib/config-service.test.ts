@@ -1,12 +1,12 @@
-import { ConfigService } from "lib/config-service";
-import { test } from "vitest";
+import { ConfigService } from "lib/services/implementations/config-service";
+import { expect, test } from "vitest";
 
 test("ConfigService exists", () => {
   ConfigService;
 });
 
 test("ConfgiService has getApiUrl method", () => {
-  try {
-    ConfigService.getApiUrl();
-  } catch {}
+  let configService = new ConfigService();
+
+  expect(configService.getApiUrl).toBeInstanceOf(Function);
 });
