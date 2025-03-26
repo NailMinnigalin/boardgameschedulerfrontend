@@ -1,5 +1,5 @@
 import { UserService } from "lib/services/implementations/user-service";
-import { SignInErrorType } from "lib/services/interfaces/user-service";
+import { SignInErrorType } from "lib/services/interfaces/user-service.interface";
 import { expect, test, vi } from "vitest";
 
 test.concurrent("UserService exists", () =>{

@@ -4,7 +4,7 @@ import { IApiService, IApiServiceToken } from "./interfaces/api-service.interfac
 import { ApiService } from "./implementations/api-service";
 import { IConfigService, IConfigServiceToken } from "./interfaces/config-service.interface";
 import { ConfigService } from "./implementations/config-service";
-import { IUserService, IUserServiceToken } from "./interfaces/user-service";
+import { IUserService, IUserServiceToken } from "./interfaces/user-service.interface";
 import { UserService } from "./implementations/user-service";
 
 container.register<IApiService>(IApiServiceToken, { useClass: ApiService });

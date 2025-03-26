@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { IApiServiceToken, type IApiService } from "../interfaces/api-service.interface";
-import { IUserService, SignInErrorType, SignInResult } from "../interfaces/user-service";
+import { IUserService, SignInErrorType, SignInResult } from "../interfaces/user-service.interface";
 
 @injectable()
 export class UserService implements IUserService {
