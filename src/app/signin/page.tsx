@@ -2,7 +2,6 @@ import { Button } from "@/components/components/ui/button";
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/components/ui/card";
