@@ -5,10 +5,6 @@ export enum SignInErrorType {
   IncorrectEmailFormat
 }
 
-export interface IUserService {
-  signIn(email: string, password: string) : Promise<SignInResult>;
-}
-
 export class SignInResult{
   isSuccess : boolean;
   errorType : SignInErrorType | null;
@@ -21,4 +17,8 @@ export class SignInResult{
   static Successful() : SignInResult{
     return new SignInResult(true, null);
   }
+}
+
+export interface IUserService {
+  signIn(email: string, password: string) : Promise<SignInResult>;
 }
