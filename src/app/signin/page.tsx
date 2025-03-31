@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/components/ui/button";
 import {
   Card,
@@ -7,11 +9,20 @@ import {
 } from "@/components/components/ui/card";
 import { Input } from "@/components/components/ui/input";
 import { Label } from "@/components/components/ui/label";
+import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    router.push("/");
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-900">
-      <form>
+      <form onSubmit={handleSubmit}>
         <Card className="w-full max-w-md bg-gray-800 text-white">
           <SignInHeader />
           <SignInContent />

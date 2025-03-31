@@ -1,14 +1,10 @@
-"use server";
-
-import { inject, injectable } from "tsyringe";
 import { IApiService } from "../interfaces/api-service.interface";
 import { IConfigServiceToken, type IConfigService } from "../interfaces/config-service.interface";
 
-@injectable()
 export class ApiService implements IApiService{
     #configService : IConfigService;
 
-    constructor(@inject(IConfigServiceToken) configService: IConfigService){
+    constructor(configService: IConfigService){
         this.#configService = configService;
     }
 

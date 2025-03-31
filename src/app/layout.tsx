@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { DIProvider } from "lib/DIProvider";
-import "lib/services/container";
 
 export const metadata: Metadata = {
   title: "BoardGameScheduler",
@@ -15,9 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-gray-900 text-white">
-        <DIProvider>{children}</DIProvider>
-      </body>
+      <body className="bg-gray-900 text-white">{children}</body>
     </html>
   );
 }
