@@ -1,4 +1,4 @@
-export class ConfigService implements ConfigService {
+export class ConfigService{
   getApiUrl(): string {
     let apiUrl = process.env.BACKEND_API_URL;
     if (apiUrl) return apiUrl;

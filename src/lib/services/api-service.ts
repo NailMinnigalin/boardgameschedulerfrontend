@@ -1,11 +1,10 @@
-import { IApiService } from "../interfaces/api-service.interface";
-import { IConfigServiceToken, type IConfigService } from "../interfaces/config-service.interface";
+import { ConfigService } from "./config-service";
 
-export class ApiService implements IApiService{
-    #configService : IConfigService;
+export class ApiService{
+    #configService : ConfigService;
 
-    constructor(configService: IConfigService){
-        this.#configService = configService;
+    constructor(configService?: ConfigService){
+        this.#configService = configService ?? new ConfigService();
     }
 
     async signIn(email: string, password: string) : Promise<boolean> {

@@ -1,4 +1,4 @@
-import { ConfigService } from "lib/services/implementations/config-service";
+import { ConfigService } from "lib/services/config-service";
 import { expect, test } from "vitest";
 
 test("ConfigService exists", () => {

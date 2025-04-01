@@ -1,21 +1,16 @@
-import { ApiService } from "lib/services/implementations/api-service";
-import { IConfigService } from "lib/services/interfaces/config-service.interface";
+import { ApiService } from "lib/services/api-service";
+import { ConfigService } from "lib/services/config-service";
 import { beforeEach, expect, test, vi } from "vitest";
+import { mock } from "vitest-mock-extended";
 
 test.concurrent("ApiService exists", () => {
     expect(ApiService).toBeDefined();
 });
 
-let mockConfigService: IConfigService;
-let apiService: ApiService;
 
-beforeEach(() => {
-    vi.resetAllMocks();
-    mockConfigService = {
-        getApiUrl: vi.fn().mockReturnValue("MockApiUrl")
-    }
-    apiService = new ApiService(mockConfigService);
-})
+const mockConfigService = mock<ConfigService>();
+mockConfigService.getApiUrl.mockReturnValue("MockApiUrl");
+let apiService: ApiService = new ApiService(mockConfigService);
 
 test.concurrent("ApiService has signIn method", () => {
     let apiService = new ApiService(mockConfigService);
