@@ -9,20 +9,24 @@ import {
 } from "@/components/components/ui/card";
 import { Input } from "@/components/components/ui/input";
 import { Label } from "@/components/components/ui/label";
+import { signInUser } from "lib/actions/server-actions";
 import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
   const router = useRouter();
 
-  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (formData: FormData) => {
+    const result = await signInUser(
+      formData.get("email")?.toString() ?? null,
+      formData.get("password")?.toString() ?? null,
+    );
 
-    router.push("/");
+    if (result.isSuccess) router.push("/");
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-900">
-      <form onSubmit={handleSubmit}>
+      <form action={handleSubmit}>
         <Card className="w-full max-w-md bg-gray-800 text-white">
           <SignInHeader />
           <SignInContent />

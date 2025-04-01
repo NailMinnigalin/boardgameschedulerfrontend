@@ -2,7 +2,9 @@ import { ApiService } from "./api-service";
 
 export enum SignInErrorType {
   IncorrectEmailOrPassword,
-  IncorrectEmailFormat
+  IncorrectEmailFormat,
+  EmailIsEmpty,
+  PasswordIsEmpty
 }
 
 export class SignInResult{
@@ -26,7 +28,11 @@ export class UserService {
     this.#apiService = apiService ?? new ApiService();
   }
 
-  async signIn(email: string, password: string) : Promise<SignInResult> {
+  async signIn(email: string | null, password: string | null) : Promise<SignInResult> {
+    if (!email)
+      return new SignInResult(false, SignInErrorType.EmailIsEmpty);
+    if (!password)
+      return new SignInResult(false, SignInErrorType.PasswordIsEmpty);
     if (!this.#isEmailValid(email))
       return new SignInResult(false, SignInErrorType.IncorrectEmailFormat);
 

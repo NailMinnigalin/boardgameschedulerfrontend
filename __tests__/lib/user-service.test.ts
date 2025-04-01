@@ -39,7 +39,7 @@ test.concurrent("UserService.signIn return SignInResult with IsSuccess false whe
     expect(signInResult.isSuccess).toBeFalsy();
 })
 
-test.concurrent("UserService.sign return SignInResult with ErrorType IncorrectEmailOrPassword when signin failed", async () =>{
+test.concurrent("UserService.signIn return SignInResult with ErrorType IncorrectEmailOrPassword when signin failed", async () =>{
     mockApiService.signIn.mockReturnValue(new Promise((resolve, reject) => {resolve(false)}));
     let userService = new UserService(mockApiService);
 
@@ -48,11 +48,29 @@ test.concurrent("UserService.sign return SignInResult with ErrorType IncorrectEm
     expect(signInResult.errorType).toBe(SignInErrorType.IncorrectEmailOrPassword);
 })
 
-test.concurrent("UserService.sign return SignInResult with ErrorType IncorrectEmailFormat when email format is incorrect", async () =>{
+test.concurrent("UserService.signIn return SignInResult with ErrorType IncorrectEmailFormat when email format is incorrect", async () =>{
     mockApiService.signIn.mockReturnValue(new Promise((resolve, reject) => {resolve(false)}));
     let userService = new UserService(mockApiService);
 
     let signInResult = await userService.signIn("incorrectEmail", "password");
 
     expect(signInResult.errorType).toBe(SignInErrorType.IncorrectEmailFormat);
+})
+
+test.concurrent("UserService.signIn accepts null values as email and returns EmailIsEmpty ErrorType", async () =>{
+    mockApiService.signIn.mockReturnValue(new Promise((resolve, reject) => {resolve(false)}));
+    let userService = new UserService(mockApiService);
+
+    let signInResult = await userService.signIn(null, "password");
+
+    expect(signInResult.errorType).toBe(SignInErrorType.EmailIsEmpty);
+})
+
+test.concurrent("UserService.signIn accepts null values as password and returns PasswordIsEmpty ErrorType", async () =>{
+    mockApiService.signIn.mockReturnValue(new Promise((resolve, reject) => {resolve(false)}));
+    let userService = new UserService(mockApiService);
+
+    let signInResult = await userService.signIn("testEmail@example.com", null);
+
+    expect(signInResult.errorType).toBe(SignInErrorType.PasswordIsEmpty);
 })
