@@ -9,27 +9,37 @@ import {
 } from "@/components/components/ui/card";
 import { Input } from "@/components/components/ui/input";
 import { Label } from "@/components/components/ui/label";
-import { signInUser } from "lib/actions/server-actions";
+import { signInUser } from "lib/actions/client-actions";
+import { SignInFormState } from "lib/schemas/signin-schema";
 import { useRouter } from "next/navigation";
+import { useActionState } from "react";
 
 export default function SignInPage() {
+  async function handleSubmit(
+    signInFormState: SignInFormState,
+    signInFormData: FormData,
+  ): Promise<SignInFormState> {
+    const result = await signInUser(signInFormData);
+    if (!result) {
+      router.push("/");
+    }
+
+    console.log(result);
+    return result;
+  }
+
+  const [formState, formAction, pending] = useActionState(
+    handleSubmit,
+    undefined,
+  );
   const router = useRouter();
-
-  const handleSubmit = async (formData: FormData) => {
-    const result = await signInUser(
-      formData.get("email")?.toString() ?? null,
-      formData.get("password")?.toString() ?? null,
-    );
-
-    if (result.isSuccess) router.push("/");
-  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-900">
-      <form action={handleSubmit}>
+      <form action={formAction}>
         <Card className="w-full max-w-md bg-gray-800 text-white">
           <SignInHeader />
-          <SignInContent />
+          <SignInContent formState={formState} />
         </Card>
       </form>
     </div>
@@ -44,17 +54,26 @@ function SignInHeader() {
   );
 }
 
-function SignInContent() {
+type SignInContentProps = {
+  formState: SignInFormState;
+};
+
+function SignInContent({ formState }: SignInContentProps) {
   return (
     <CardContent className="space-y-3">
-      <EmailInput />
-      <PasswordInput />
+      <EmailInput error={formState?.errors.email} />
+      <PasswordInput error={formState?.errors.password} />
+      {formState?.errors.general && <p>{formState.errors.general}</p>}
       <SignInButton />
     </CardContent>
   );
 }
 
-function PasswordInput() {
+type ErrorProps = {
+  error?: string[];
+};
+
+function PasswordInput({ error }: ErrorProps) {
   return (
     <>
       <Label
@@ -68,15 +87,17 @@ function PasswordInput() {
         data-testid="password_input"
         id="password"
         type="password"
+        name="password"
         required
         placeholder="Enter your password"
         className="w-full"
       ></Input>
+      {error && <p>{error}</p>}
     </>
   );
 }
 
-function EmailInput() {
+function EmailInput({ error }: ErrorProps) {
   return (
     <div>
       <Label data-testid="email_label" htmlFor="email" className="mb-1 block">
@@ -86,10 +107,12 @@ function EmailInput() {
         data-testid="email_input"
         id="email"
         type="email"
+        name="email"
         className="w-full"
         required
         placeholder="Enter your email"
       ></Input>
+      {error && <p>{error}</p>}
     </div>
   );
 }
