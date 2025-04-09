@@ -2,9 +2,9 @@
 
 import { UserService } from "../services/user-service";
 
-export async function signInUser(email: string | null, password: string | null)
+export async function signInUser(email: string | null, password: string | null, userService: UserService | undefined = undefined)
   : Promise<{isSuccess: boolean, errorType : number | null}>{
-    const userService = new UserService();
+    if (!userService) userService = new UserService();
     const result = await userService.signIn(email, password);
 
     return {
