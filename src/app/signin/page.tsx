@@ -9,8 +9,8 @@ import {
 } from "@/components/components/ui/card";
 import { Input } from "@/components/components/ui/input";
 import { Label } from "@/components/components/ui/label";
-import { signInUser } from "lib/actions/client-actions";
-import { SignInFormState } from "lib/schemas/signin-schema";
+import { signInUser } from "../../lib/clinet/client-actions";
+import { SignInFormState } from "../../lib/common/types/signin/signin-schema";
 import { useRouter } from "next/navigation";
 import { useActionState } from "react";
 
@@ -24,14 +24,10 @@ export default function SignInPage() {
       router.push("/");
     }
 
-    console.log(result);
     return result;
   }
 
-  const [formState, formAction, pending] = useActionState(
-    handleSubmit,
-    undefined,
-  );
+  const [formState, formAction] = useActionState(handleSubmit, undefined);
   const router = useRouter();
 
   return (

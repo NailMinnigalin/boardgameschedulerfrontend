@@ -1,11 +1,5 @@
 import { ApiService } from "./api-service";
-
-export enum SignInErrorType {
-  IncorrectEmailOrPassword,
-  IncorrectEmailFormat,
-  EmailIsEmpty,
-  PasswordIsEmpty
-}
+import { SignInErrorType } from "../../common/types/signin/signin-error-type";
 
 export class SignInResult{
   isSuccess : boolean;
@@ -36,7 +30,7 @@ export class UserService {
     if (!this.#isEmailValid(email))
       return new SignInResult(false, SignInErrorType.IncorrectEmailFormat);
 
-    let result = await this.#apiService.signIn(email, password);
+    const result = await this.#apiService.signIn(email, password);
     
     if (result)
       return SignInResult.Successful();

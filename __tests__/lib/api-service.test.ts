@@ -1,6 +1,6 @@
-import { ApiService } from "lib/services/api-service";
-import { ConfigService } from "lib/services/config-service";
-import { beforeEach, expect, test, vi } from "vitest";
+import { ApiService } from "../../src/lib/server/services/api-service";
+import { ConfigService } from "../../src/lib/server/services/config-service";
+import { expect, test, vi } from "vitest";
 import { mock } from "vitest-mock-extended";
 
 test.concurrent("ApiService exists", () => {
@@ -10,11 +10,9 @@ test.concurrent("ApiService exists", () => {
 
 const mockConfigService = mock<ConfigService>();
 mockConfigService.getApiUrl.mockReturnValue("MockApiUrl");
-let apiService: ApiService = new ApiService(mockConfigService);
+const apiService: ApiService = new ApiService(mockConfigService);
 
 test.concurrent("ApiService has signIn method", () => {
-    let apiService = new ApiService(mockConfigService);
-
     expect(apiService.signIn).toBeInstanceOf(Function);
 });
 
@@ -26,7 +24,7 @@ test.concurrent("ApiService.signIn return true when user is successfuly signed i
         } as Response)
     );
 
-    let result = await apiService.signIn("testEmail@example.com", "password")
+    const result = await apiService.signIn("testEmail@example.com", "password")
 
     expect(result).toBeTruthy();
 });
@@ -39,7 +37,7 @@ test.concurrent("ApiService.signIn return false when user not exists", async () 
         } as Response)
     );
 
-    let result = await apiService.signIn("nonExistingEmail@example.com", "password")
+    const result = await apiService.signIn("nonExistingEmail@example.com", "password")
 
     expect(result).toBeFalsy();
 });

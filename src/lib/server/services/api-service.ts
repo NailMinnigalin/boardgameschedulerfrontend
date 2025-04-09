@@ -7,14 +7,15 @@ export class ApiService{
         this.#configService = configService ?? new ConfigService();
     }
 
-    async signIn(email: string, password: string) : Promise<boolean> {
-        let response = await fetch(`${this.#configService.getApiUrl()}/signin`, {
+    async signIn(userName: string, password: string) : Promise<boolean> {
+
+        const response = await fetch(`${this.#configService.getApiUrl()}/signin`, {
             method: 'POST',
             credentials: 'include',
             headers: {
             'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ userName, password }),
         });
 
         return response.ok;

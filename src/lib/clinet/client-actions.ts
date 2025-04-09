@@ -1,8 +1,8 @@
 "use client";
 
-import { signInUser as signInUserServer } from "lib/actions/server-actions"
-import { SignInFormSchema, SignInFormState } from "lib/schemas/signin-schema";
-import { SignInErrorType } from "lib/services/user-service";
+import { signInUser as signInUserServerAction } from "../server/actions/server-actions"
+import { SignInFormSchema, SignInFormState } from "../common/types/signin/signin-schema";
+import { SignInErrorType } from "../common/types/signin/signin-error-type";
 
 const ERROR_MESSAGES = {
     INVALID_CREDENTIALS: "Invalid email or password",
@@ -26,20 +26,19 @@ export async function signInUser(signInFormData: FormData): Promise<SignInFormSt
 
 async function DoServerSignIn(email: string, password: string){
     try {
-        const signInResult = await signInUserServer(email, password);
+        const signInResult = await signInUserServerAction(email, password);
 
         if (!signInResult.isSuccess) {
             return getErrors(signInResult);
         }
 
         return undefined; //Successful signIN
-    } catch (error) {
-        console.error("SignIn Error:", error);
+    } catch {
         return { errors: { general: [ERROR_MESSAGES.UNKNOWN_ERROR] } };
     }
 }
 
-function getErrors(signInResult: { isSuccess: boolean; errorType: SignInErrorType | null; }) {
+function getErrors(signInResult: { isSuccess: boolean; errorType: number | null; }) {
     switch (signInResult.errorType) {
         case SignInErrorType.IncorrectEmailOrPassword:
             return { errors: { general: [ERROR_MESSAGES.INVALID_CREDENTIALS] } };
