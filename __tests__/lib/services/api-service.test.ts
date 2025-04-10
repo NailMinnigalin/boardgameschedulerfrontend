@@ -1,5 +1,5 @@
-import { ApiService } from "../../src/lib/server/services/api-service";
-import { ConfigService } from "../../src/lib/server/services/config-service";
+import { ApiService } from "../../../src/lib/server/services/api-service";
+import { ConfigService } from "../../../src/lib/server/services/config-service";
 import { expect, test, vi } from "vitest";
 import { mock } from "vitest-mock-extended";
 

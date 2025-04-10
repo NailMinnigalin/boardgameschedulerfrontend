@@ -1,8 +1,8 @@
-import { ApiService } from "../../src/lib/server/services/api-service";
-import { UserService } from "../../src/lib/server/services/user-service";
+import { ApiService } from "../../../src/lib/server/services/api-service";
+import { UserService } from "../../../src/lib/server/services/user-service";
 import { beforeEach, expect, test } from "vitest";
 import { mock, mockReset } from 'vitest-mock-extended';
-import { SignInErrorType } from "../../src/lib/common/types/signin/signin-error-type";
+import { SignInErrorType } from "../../../src/lib/common/types/signin/signin-error-type";
 
 const mockApiService = mock<ApiService>();
 
