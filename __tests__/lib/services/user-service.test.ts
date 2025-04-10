@@ -26,7 +26,7 @@ test.concurrent("UserService.signIn return SignInResult with IsSuccess true when
     mockApiService.signIn.mockReturnValue(new Promise((resolve) => {resolve(true)}));
     const userService = new UserService(mockApiService);
 
-    const signInResult = await userService.signIn("testEmail@example.com", "password");
+    const signInResult = await userService.signIn("testUser", "password");
 
     expect(signInResult.isSuccess).toBeTruthy();
 })
@@ -35,36 +35,27 @@ test.concurrent("UserService.signIn return SignInResult with IsSuccess false whe
     mockApiService.signIn.mockReturnValue(new Promise((resolve) => {resolve(false)}));
     const userService = new UserService(mockApiService);
 
-    const signInResult = await userService.signIn("notExistingEmail@example.com", "password");
+    const signInResult = await userService.signIn("notExistingUser", "password");
 
     expect(signInResult.isSuccess).toBeFalsy();
 })
 
-test.concurrent("UserService.signIn return SignInResult with ErrorType IncorrectEmailOrPassword when signin failed", async () =>{
+test.concurrent("UserService.signIn return SignInResult with ErrorType IncorrectUserNameOrPassword when signin failed", async () =>{
     mockApiService.signIn.mockReturnValue(new Promise((resolve) => {resolve(false)}));
     const userService = new UserService(mockApiService);
 
-    const signInResult = await userService.signIn("notExistingEmail@example.com", "password");
+    const signInResult = await userService.signIn("notExistingUser", "password");
 
-    expect(signInResult.errorType).toBe(SignInErrorType.IncorrectEmailOrPassword);
+    expect(signInResult.errorType).toBe(SignInErrorType.IncorrectUserNameOrPassword);
 })
 
-test.concurrent("UserService.signIn return SignInResult with ErrorType IncorrectEmailFormat when email format is incorrect", async () =>{
-    mockApiService.signIn.mockReturnValue(new Promise((resolve) => {resolve(false)}));
-    const userService = new UserService(mockApiService);
-
-    const signInResult = await userService.signIn("incorrectEmail", "password");
-
-    expect(signInResult.errorType).toBe(SignInErrorType.IncorrectEmailFormat);
-})
-
-test.concurrent("UserService.signIn accepts null values as email and returns EmailIsEmpty ErrorType", async () =>{
+test.concurrent("UserService.signIn accepts null values as userName and returns UserNameIsEmpty ErrorType", async () =>{
     mockApiService.signIn.mockReturnValue(new Promise((resolve) => {resolve(false)}));
     const userService = new UserService(mockApiService);
 
     const signInResult = await userService.signIn(null, "password");
 
-    expect(signInResult.errorType).toBe(SignInErrorType.EmailIsEmpty);
+    expect(signInResult.errorType).toBe(SignInErrorType.UserNameIsEmpty);
 })
 
 test.concurrent("UserService.signIn accepts null values as password and returns PasswordIsEmpty ErrorType", async () =>{

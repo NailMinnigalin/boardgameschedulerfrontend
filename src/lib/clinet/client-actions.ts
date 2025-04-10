@@ -11,7 +11,7 @@ const ERROR_MESSAGES = {
 
 export async function signInUser(signInFormData: FormData): Promise<SignInFormState>{
     const validatedFields = SignInFormSchema.safeParse({
-        email: signInFormData.get("email"),
+        userName: signInFormData.get("userName"),
         password: signInFormData.get("password"),
     });
 
@@ -21,12 +21,12 @@ export async function signInUser(signInFormData: FormData): Promise<SignInFormSt
         }
     }
 
-    return DoServerSignIn(validatedFields.data.email, validatedFields.data.password);
+    return DoServerSignIn(validatedFields.data.userName, validatedFields.data.password);
 }
 
-async function DoServerSignIn(email: string, password: string){
+async function DoServerSignIn(userName: string, password: string){
     try {
-        const signInResult = await signInUserServerAction(email, password);
+        const signInResult = await signInUserServerAction(userName, password);
 
         if (!signInResult.isSuccess) {
             return getErrors(signInResult);
@@ -40,7 +40,7 @@ async function DoServerSignIn(email: string, password: string){
 
 function getErrors(signInResult: { isSuccess: boolean; errorType: number | null; }) {
     switch (signInResult.errorType) {
-        case SignInErrorType.IncorrectEmailOrPassword:
+        case SignInErrorType.IncorrectUserNameOrPassword:
             return { errors: { general: [ERROR_MESSAGES.INVALID_CREDENTIALS] } };
         default:
             return { errors: { general: [ERROR_MESSAGES.UNKNOWN_ERROR] } };

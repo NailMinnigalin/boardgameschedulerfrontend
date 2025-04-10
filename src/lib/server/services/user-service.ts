@@ -22,24 +22,17 @@ export class UserService {
     this.#apiService = apiService ?? new ApiService();
   }
 
-  async signIn(email: string | null, password: string | null) : Promise<SignInResult> {
-    if (!email)
-      return new SignInResult(false, SignInErrorType.EmailIsEmpty);
+  async signIn(userName: string | null, password: string | null) : Promise<SignInResult> {
+    if (!userName)
+      return new SignInResult(false, SignInErrorType.UserNameIsEmpty);
     if (!password)
       return new SignInResult(false, SignInErrorType.PasswordIsEmpty);
-    if (!this.#isEmailValid(email))
-      return new SignInResult(false, SignInErrorType.IncorrectEmailFormat);
 
-    const result = await this.#apiService.signIn(email, password);
+    const result = await this.#apiService.signIn(userName, password);
     
     if (result)
       return SignInResult.Successful();
     else
-      return new SignInResult(false, SignInErrorType.IncorrectEmailOrPassword);
-  }
-
-  #isEmailValid(email: string) : boolean {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
+      return new SignInResult(false, SignInErrorType.IncorrectUserNameOrPassword);
   }
 }

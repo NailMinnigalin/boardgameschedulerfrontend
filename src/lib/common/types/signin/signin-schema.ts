@@ -1,13 +1,13 @@
 import { z } from 'zod'
 
 export const SignInFormSchema = z.object({
-    email: z.string().email('Please enter a valid email.').trim(),
-    password: z.string().trim()
+    userName: z.string().min(1).trim(),
+    password: z.string().min(1).trim()
 })
 
 export type SignInFormState = {
   errors: {
-    email?: string[];
+    userName?: string[];
     password?: string[];
     general?: string[];
   };

@@ -1,6 +1,6 @@
 export enum SignInErrorType {
-  IncorrectEmailOrPassword,
+  IncorrectUserNameOrPassword,
   IncorrectEmailFormat,
-  EmailIsEmpty,
+  UserNameIsEmpty,
   PasswordIsEmpty
 }

@@ -57,7 +57,7 @@ type SignInContentProps = {
 function SignInContent({ formState }: SignInContentProps) {
   return (
     <CardContent className="space-y-3">
-      <EmailInput error={formState?.errors.email} />
+      <UserNameInput error={formState?.errors.userName} />
       <PasswordInput error={formState?.errors.password} />
       {formState?.errors.general && <p>{formState.errors.general}</p>}
       <SignInButton />
@@ -73,14 +73,12 @@ function PasswordInput({ error }: ErrorProps) {
   return (
     <>
       <Label
-        data-testid="password_label"
         htmlFor="password"
         className="mb-1 block"
       >
         Password
       </Label>
       <Input
-        data-testid="password_input"
         id="password"
         type="password"
         name="password"
@@ -93,20 +91,19 @@ function PasswordInput({ error }: ErrorProps) {
   );
 }
 
-function EmailInput({ error }: ErrorProps) {
+function UserNameInput({ error }: ErrorProps) {
   return (
     <div>
-      <Label data-testid="email_label" htmlFor="email" className="mb-1 block">
+      <Label htmlFor="email" className="mb-1 block">
         Email
       </Label>
       <Input
-        data-testid="email_input"
-        id="email"
-        type="email"
-        name="email"
+        id="userName"
+        type="text"
+        name="userName"
         className="w-full"
         required
-        placeholder="Enter your email"
+        placeholder="Enter your user name"
       ></Input>
       {error && <p>{error}</p>}
     </div>
@@ -116,7 +113,6 @@ function EmailInput({ error }: ErrorProps) {
 function SignInButton() {
   return (
     <Button
-      data-testid="signin_button"
       type="submit"
       className="w-full rounded border border-gray-500 bg-gray-700 px-4 py-2 hover:bg-gray-600"
     >

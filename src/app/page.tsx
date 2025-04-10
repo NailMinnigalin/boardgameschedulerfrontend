@@ -8,7 +8,6 @@ export default function Home() {
       <div className="space-y-4">
         <Button
           asChild
-          data-testid="signIn_button"
           className="rounded border border-gray-500 bg-gray-800 px-4 py-2 hover:bg-gray-700"
         >
           <Link href="/signin">Sign In</Link>

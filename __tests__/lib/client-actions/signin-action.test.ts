@@ -17,7 +17,7 @@ test.concurrent("signInUser action exists", async () => {
 
 test.concurrent("signInUser action returns undefined when signin successfully", async () => {
   const formData = new FormData();
-  formData.set('email', 'test@example.com');
+  formData.set('userName', 'test');
   formData.set('password', 'password123');
   (signInUserServerAction as Mock).mockResolvedValueOnce({ isSuccess: true });
 
@@ -28,9 +28,9 @@ test.concurrent("signInUser action returns undefined when signin successfully", 
 
 test.concurrent("signInUser action returns general error when user not exist", async () => {
   const formData = new FormData();
-  formData.set('email', 'test@example.com');
+  formData.set('userName', 'test');
   formData.set('password', 'password123');
-  (signInUserServerAction as Mock).mockResolvedValueOnce({ isSuccess: false, errorType: SignInErrorType.IncorrectEmailOrPassword});
+  (signInUserServerAction as Mock).mockResolvedValueOnce({ isSuccess: false, errorType: SignInErrorType.IncorrectUserNameOrPassword});
 
   const result = await signInUser(formData);
 
@@ -40,11 +40,11 @@ test.concurrent("signInUser action returns general error when user not exist", a
 
 test.concurrent("signInUser action return email error when email is not valid", async () => {
   const formData = new FormData();
-  formData.set('email', 'test');
+  formData.set('email', '');
   formData.set('password', 'password123');
-  (signInUserServerAction as Mock).mockResolvedValueOnce({ isSuccess: false, errorType: SignInErrorType.IncorrectEmailOrPassword});
+  (signInUserServerAction as Mock).mockResolvedValueOnce({ isSuccess: false, errorType: SignInErrorType.IncorrectUserNameOrPassword});
 
   const result = await signInUser(formData);
 
-  expect(result?.errors.email).toBeDefined();
+  expect(result?.errors.userName).toBeDefined();
 })

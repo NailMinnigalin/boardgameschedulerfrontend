@@ -24,7 +24,7 @@ test.concurrent("signInUser action returns isSuccess true if signin was successf
 })
 
 test.concurrent("signInUser action return isSuccess false if signin was failure", async () =>{
-  const signInResult = new SignInResult(false, SignInErrorType.IncorrectEmailOrPassword);
+  const signInResult = new SignInResult(false, SignInErrorType.IncorrectUserNameOrPassword);
   mockUserService.signIn.mockReturnValue(new Promise((resolve) => {resolve(signInResult)}));
 
   const result = await signInUser("test@email.com", "123", mockUserService);
