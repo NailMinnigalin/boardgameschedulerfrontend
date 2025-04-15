@@ -1,0 +1,9 @@
+.next
+.vscode
+__tests__
+coverage
+node_modules
+.gitignore
+Dockerfile
+.dockerignore
+.env.*
