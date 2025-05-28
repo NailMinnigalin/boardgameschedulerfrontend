@@ -16,13 +16,8 @@ test.concurrent("ApiService has signIn method", () => {
     expect(apiService.signIn).toBeInstanceOf(Function);
 });
 
-test.concurrent("ApiService.signIn return true when user is successfuly signed in", async () => {
-    global.fetch = vi.fn(() =>
-        Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve({}),
-        } as Response)
-    );
+test.concurrent("ApiService.signIn return true when user is successfully signed in", async () => {
+    setupFetchToReturn(true)
 
     const result = await apiService.signIn("testEmail@example.com", "password")
 
@@ -30,14 +25,18 @@ test.concurrent("ApiService.signIn return true when user is successfuly signed i
 });
 
 test.concurrent("ApiService.signIn return false when user not exists", async () => {
-    global.fetch = vi.fn(() =>
-        Promise.resolve({
-          ok: false,
-          json: () => Promise.resolve({}),
-        } as Response)
-    );
+    setupFetchToReturn(false)
 
     const result = await apiService.signIn("nonExistingEmail@example.com", "password")
 
     expect(result).toBeFalsy();
 });
+
+function  setupFetchToReturn(val: boolean) {
+  global.fetch = vi.fn(() =>
+    Promise.resolve({
+      ok: val,
+      json: () => Promise.resolve({}),
+    } as Response)
+  );
+}

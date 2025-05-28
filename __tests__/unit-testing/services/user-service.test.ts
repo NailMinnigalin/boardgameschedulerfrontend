@@ -22,9 +22,8 @@ test.concurrent("UserService has signIn method", () => {
     expect(userService.signIn).toBeInstanceOf(Function);
 });
 
-test.concurrent("UserService.signIn return SignInResult with IsSuccess true when user is successfuly signed in", async () => {
-    mockApiService.signIn.mockReturnValue(new Promise((resolve) => {resolve(true)}));
-    const userService = new UserService(mockApiService);
+test.concurrent("UserService.signIn return SignInResult with IsSuccess true when user is successfully signed in", async () => {
+    const userService = createUserServiceWhosApiServiceSignInReturn(true)
 
     const signInResult = await userService.signIn("testUser", "password");
 
@@ -32,8 +31,7 @@ test.concurrent("UserService.signIn return SignInResult with IsSuccess true when
 })
 
 test.concurrent("UserService.signIn return SignInResult with IsSuccess false when user not exists", async () => {
-    mockApiService.signIn.mockReturnValue(new Promise((resolve) => {resolve(false)}));
-    const userService = new UserService(mockApiService);
+    const userService = createUserServiceWhosApiServiceSignInReturn(false)
 
     const signInResult = await userService.signIn("notExistingUser", "password");
 
@@ -41,8 +39,7 @@ test.concurrent("UserService.signIn return SignInResult with IsSuccess false whe
 })
 
 test.concurrent("UserService.signIn return SignInResult with ErrorType IncorrectUserNameOrPassword when signin failed", async () =>{
-    mockApiService.signIn.mockReturnValue(new Promise((resolve) => {resolve(false)}));
-    const userService = new UserService(mockApiService);
+    const userService = createUserServiceWhosApiServiceSignInReturn(false)
 
     const signInResult = await userService.signIn("notExistingUser", "password");
 
@@ -50,8 +47,7 @@ test.concurrent("UserService.signIn return SignInResult with ErrorType Incorrect
 })
 
 test.concurrent("UserService.signIn accepts null values as userName and returns UserNameIsEmpty ErrorType", async () =>{
-    mockApiService.signIn.mockReturnValue(new Promise((resolve) => {resolve(false)}));
-    const userService = new UserService(mockApiService);
+    const userService = createUserServiceWhosApiServiceSignInReturn(false)
 
     const signInResult = await userService.signIn(null, "password");
 
@@ -59,10 +55,14 @@ test.concurrent("UserService.signIn accepts null values as userName and returns 
 })
 
 test.concurrent("UserService.signIn accepts null values as password and returns PasswordIsEmpty ErrorType", async () =>{
-    mockApiService.signIn.mockReturnValue(new Promise((resolve) => {resolve(false)}));
-    const userService = new UserService(mockApiService);
+    const userService = createUserServiceWhosApiServiceSignInReturn(false)
 
     const signInResult = await userService.signIn("testEmail@example.com", null);
 
     expect(signInResult.errorType).toBe(SignInErrorType.PasswordIsEmpty);
 })
+
+function createUserServiceWhosApiServiceSignInReturn(val: boolean) : UserService{
+    mockApiService.signIn.mockReturnValue(new Promise((resolve) => {resolve(val)}));
+    return new UserService(mockApiService);
+}
