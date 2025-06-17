@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/components/ui/button";
 import {
   Card,
   CardContent,
@@ -13,6 +12,7 @@ import { signInUser } from "../../lib/clinet/client-actions";
 import { SignInFormState } from "../../lib/common/types/signin/signin-schema";
 import { useRouter } from "next/navigation";
 import { useActionState } from "react";
+import BgsSubmitButton from "@/components/bgs_components/bgs-submit-button";
 
 export default function SignInPage() {
   async function handleSubmit(
@@ -60,7 +60,7 @@ function SignInContent({ formState }: SignInContentProps) {
       <UserNameInput error={formState?.errors.userName} />
       <PasswordInput error={formState?.errors.password} />
       {formState?.errors.general && <p>{formState.errors.general}</p>}
-      <SignInButton />
+      <BgsSubmitButton>Sign In</BgsSubmitButton>
     </CardContent>
   );
 }
@@ -94,8 +94,8 @@ function PasswordInput({ error }: ErrorProps) {
 function UserNameInput({ error }: ErrorProps) {
   return (
     <div>
-      <Label htmlFor="email" className="mb-1 block">
-        Email
+      <Label htmlFor="userName" className="mb-1 block">
+        User name
       </Label>
       <Input
         id="userName"
@@ -107,16 +107,5 @@ function UserNameInput({ error }: ErrorProps) {
       ></Input>
       {error && <p>{error}</p>}
     </div>
-  );
-}
-
-function SignInButton() {
-  return (
-    <Button
-      type="submit"
-      className="w-full rounded border border-gray-500 bg-gray-700 px-4 py-2 hover:bg-gray-600"
-    >
-      Sign In
-    </Button>
   );
 }
